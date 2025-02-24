@@ -3,6 +3,7 @@
 %   To plot MSE (Both True and Tracking) for demonstrating the effect of 
 %   1,2--> Drift (Random Walk) on the performance of ILC tracking a drifting PRBS
 %   3,4--> Measurement noise (White) on the performance of ILC tracking a drifting PRBS
+%   5,6--> Classical vs Reset ILC
 %
 % Author:  Satya Prasad
 % Updated: 2025/02/10
@@ -102,7 +103,7 @@ legend('$C_{wn} = 0.0004$','$C_{wn} = 0.00004$','$C_{wn} = 0.000004$',...
     'Interpreter','latex','Location','best','FontSize',13)
 
 %% Reset vs Classical ILC
-figure(11)
+figure(05)
 clf
 width = 540; height = 400; right = 100; bottom = 100;
 set(gcf, 'position', [right, bottom, width, height])
@@ -116,4 +117,22 @@ set(gca,'YScale','log','XScale','log','XTick',[1e0 1e1 1e2 1e3 1e4 1e5],'FontSiz
 ylabel('Mean Squared Error $[Unit^{2}]$','Interpreter','latex','FontSize',18)
 xlabel('Iteration Number','Interpreter','latex','FontSize',18)
 legend('Classical ILC','Reset ILC','Interpreter','latex','Location','best','FontSize',13)
+ylim([1e-3 1e0])
+
+figure(06)
+clf
+width = 540; height = 400; right = 100; bottom = 100;
+set(gcf, 'position', [right, bottom, width, height])
+hold on
+grid on
+load("20250209_InDrift0p02_OutWhite0p0004.mat")
+plot(1:data.number_of_iterations,data.true_error_mse','r','LineWidth',2.4)
+load("20250219_InDrift0p02_OutWhite0p0004_Reset2.mat")
+plot(1:data.number_of_iterations,data.true_error_mse','g','LineWidth',1.2)
+load("20250218_InDrift0p02_OutWhite0p0004_Reset.mat")
+plot(1:data.number_of_iterations,data.true_error_mse','b','LineWidth',1.2)
+set(gca,'YScale','log','XScale','log','XTick',[1e0 1e1 1e2 1e3 1e4 1e5],'FontSize',13)
+ylabel('Mean Squared Error $[Unit^{2}]$','Interpreter','latex','FontSize',18)
+xlabel('Iteration Number','Interpreter','latex','FontSize',18)
+legend('Classical ILC','Init-reset ILC','Prev-reset ILC','Interpreter','latex','Location','best','FontSize',13)
 ylim([1e-3 1e0])

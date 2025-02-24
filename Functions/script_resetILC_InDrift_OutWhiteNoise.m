@@ -90,8 +90,8 @@ for index_run = 1:number_of_runs
             control_input = reference_input;
         elseif mod(index_iter,reset_iteration)==1
             % Control input is same as that of the previous iteration
-            control_input = reference_input;
-%             continue
+%             control_input = reference_input;
+            continue
         else
             control_input = prev_control_input + ...
                 gamma*[prev_tracking_error(2:length_of_iteration,1); ...

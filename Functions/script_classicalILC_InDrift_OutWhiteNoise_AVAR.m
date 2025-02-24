@@ -144,6 +144,18 @@ set(gca,'YScale','log','XScale','log','FontSize',13)
 ylabel('Allan Variance $[Unit^2]$','Interpreter','latex','FontSize',18)
 xlabel('Correlation Interval $[Number \: of \: Iterations]$','Interpreter','latex','FontSize',18)
 
+avar_drift = fcn_AVAR_favar([random_walk; 0], list_of_correlation_intervals);
+figure(12346)
+clf
+hold on
+grid on
+for index_time = 1:length_of_iteration
+    plot(list_of_correlation_intervals, vec_tracking_avar(:,index_time)+avar_drift)
+end % NOTE: END FOR loop 'length_of_iteration'
+set(gca,'YScale','log','XScale','log','FontSize',13)
+ylabel('Allan Variance $[Unit^2]$','Interpreter','latex','FontSize',18)
+xlabel('Correlation Interval $[Number \: of \: Iterations]$','Interpreter','latex','FontSize',18)
+
 % data.list_of_correlation_intervals = list_of_correlation_intervals;
 % data.length_of_iteration = length_of_iteration;
 % data.vec_tracking_avar = vec_tracking_avar;
@@ -152,7 +164,7 @@ xlabel('Correlation Interval $[Number \: of \: Iterations]$','Interpreter','late
 % clear data
 % load(file_name);
 % 
-% figure(12346)
+% figure(12347)
 % clf
 % hold on
 % grid on
